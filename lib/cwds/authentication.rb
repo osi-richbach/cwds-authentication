@@ -25,5 +25,9 @@ module Cwds
       "#{authentication_api_base_url}/authn/login?callback=#{callback_url}"
     end
 
+    def self.logout_url(authentication_api_base_url,callback_url)
+      "#{authentication_api_base_url}/authn/logout?callback=#{callback_url}"
+    end
+
   end
 end
