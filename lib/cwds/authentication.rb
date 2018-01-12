@@ -13,6 +13,7 @@ module Cwds
 
     def self.token_generation(accessCode, authentication_api_base_url)
       puts 'gets token from perry'
+      return unless accessCode.present?
       token_response = Faraday.get(token_generation_url(accessCode, authentication_api_base_url)) if accessCode.present? 
       token_response.body if token_response.status == 200      
     end
