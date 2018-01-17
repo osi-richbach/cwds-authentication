@@ -11,11 +11,23 @@ module Cwds
 
     end
 
+    def self.token_generation(accessCode, authentication_api_base_url)
+      puts 'gets token from perry'
+      return unless accessCode.present?
+      token_response = Faraday.get(token_generation_url(accessCode, authentication_api_base_url)) if accessCode.present? 
+      token_response.body if token_response.status == 200      
+    end
+
     def self.store_user_details_from_token(token)
       return unless token.present?
       user_details_repsonse = Faraday.get(token_validation_url(token, AUTHENTICATION_API_BASE_URL))
       user_details_repsonse.body   if user_details_repsonse.status == 200
-   end
+    end
+
+    def self.token_generation_url(accessCode, authentication_api_base_url)
+      "#{authentication_api_base_url}/authn/token?accessCode=#{accessCode}"
+    end
+
     
     def self.token_validation_url(token, authentication_api_base_url)
       "#{authentication_api_base_url}/authn/validate?token=#{token}"
