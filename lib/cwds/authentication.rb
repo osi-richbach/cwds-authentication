@@ -18,9 +18,9 @@ module Cwds
       token_response.body if token_response.status == 200      
     end
 
-    def self.store_user_details_from_token(token)
+    def self.store_user_details_from_token(token, authentication_api_base_url)
       return unless token.present?
-      user_details_repsonse = Faraday.get(token_validation_url(token, AUTHENTICATION_API_BASE_URL))
+      user_details_repsonse = Faraday.get(token_validation_url(token, authentication_api_base_url))
       user_details_repsonse.body   if user_details_repsonse.status == 200
     end
 
